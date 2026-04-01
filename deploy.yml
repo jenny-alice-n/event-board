@@ -1,0 +1,74 @@
+---
+- name: Deploy Event Board via Docker Compose
+  # Replace 'all' or 'webservers' with your target host group specified in your inventory file
+  hosts: all
+  become: yes
+  vars:
+    # Directory where the app will be deployed on the target server
+    project_dir: /opt/event-board
+
+  tasks:
+    - name: Update apt cache and install basic dependencies (Debian/Ubuntu)
+      apt:
+        name: 
+          - rsync
+          - docker.io
+          - docker-compose
+        state: present
+        update_cache: yes
+      when: ansible_os_family == "Debian"
+
+    - name: Install basic dependencies (RHEL/CentOS)
+      yum:
+        name:
+          - rsync
+          - docker
+          - docker-compose
+        state: present
+      when: ansible_os_family == "RedHat"
+
+    - name: Start and enable Docker service
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Create project deployment directory
+      file:
+        path: "{{ project_dir }}"
+        state: directory
+        owner: root
+        group: root
+        mode: '0755'
+
+    - name: Synchronize repository files to the server
+      synchronize:
+        src: ./
+        dest: "{{ project_dir }}/"
+        # Avoid copying local build artifacts or git metadata
+        rsync_opts:
+          - "--exclude=.git"
+          - "--exclude=node_modules"
+          - "--exclude=client/node_modules"
+          - "--exclude=server/node_modules"
+
+    - name: Tear down existing containers (if any)
+      command: docker-compose down
+      args:
+        chdir: "{{ project_dir }}"
+      ignore_errors: yes
+
+    - name: Build and deploy the application
+      command: docker-compose up -d --build
+      args:
+        chdir: "{{ project_dir }}"
+
+    - name: Validate that containers are running
+      command: docker-compose ps
+      args:
+        chdir: "{{ project_dir }}"
+      register: up_status
+
+    - name: Output container status
+      debug:
+        var: up_status.stdout_lines
