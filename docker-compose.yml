@@ -13,8 +13,6 @@ services:
       - "5000:5000"
     env_file:
       - ./server/.env
-    depends_on:
-      - mongodb
 
   frontend:
     image: node:18-alpine
