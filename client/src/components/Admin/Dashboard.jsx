@@ -21,7 +21,7 @@ const Dashboard = () => {
 
     const fetchEvents = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/api/events');
+            const res = await axios.get('http://20.204.38.97:5000/api/events');
             if (user?.role === 'root') {
                 setEvents(res.data);
             } else {
@@ -37,7 +37,7 @@ const Dashboard = () => {
     const handleDelete = async (id) => {
         if (window.confirm('Are you sure you want to delete this event?')) {
             try {
-                await axios.delete(`http://localhost:5000/api/events/${id}`);
+                await axios.delete(`http://20.204.38.97:5000/api/events/${id}`);
                 fetchEvents();
             } catch (err) {
                 console.error(err);
@@ -131,7 +131,7 @@ const Dashboard = () => {
                                 <tr key={event._id} className="hover:bg-white/5 transition-colors group">
                                     <td className="px-6 py-4">
                                         <div className="flex items-center gap-4">
-                                            <img src={`http://localhost:5000/api/events/${event._id}/image`} className="w-12 h-12 rounded-lg object-cover" alt="" />
+                                            <img src={`http://20.204.38.97:5000/api/events/${event._id}/image`} className="w-12 h-12 rounded-lg object-cover" alt="" />
                                             <div>
                                                 <p className="font-bold">{event.name}</p>
                                                 <p className="text-xs text-slate-400">by {event.clubName}</p>

@@ -24,7 +24,7 @@ const Noticeboard = () => {
 
     const fetchEvents = async () => {
         try {
-            const res = await axios.get('http://localhost:5000/api/events');
+            const res = await axios.get('http://20.204.38.97:5000/api/events');
             setEvents(res.data);
             setLoading(false);
         } catch (err) {
@@ -80,8 +80,8 @@ const Noticeboard = () => {
                             key={cat}
                             onClick={() => setCategory(cat)}
                             className={`px-6 py-2 rounded-full border transition-all whitespace-nowrap ${category === cat
-                                    ? 'bg-indigo-600 border-indigo-500 shadow-lg shadow-indigo-500/30'
-                                    : 'bg-white/5 border-white/10 hover:bg-white/10'
+                                ? 'bg-indigo-600 border-indigo-500 shadow-lg shadow-indigo-500/30'
+                                : 'bg-white/5 border-white/10 hover:bg-white/10'
                                 }`}
                         >
                             {cat.charAt(0).toUpperCase() + cat.slice(1)}

@@ -38,7 +38,7 @@ const EventCard = ({ event, index }) => {
                 {/* Poster Image */}
                 <div className="relative overflow-hidden rounded-xl aspect-[4/5] mb-4">
                     <img
-                        src={`http://localhost:5000/api/events/${event._id}/image`}
+                        src={`http://20.204.38.97:5000/api/events/${event._id}/image`}
                         alt={event.name}
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />

@@ -18,7 +18,7 @@ const Login = () => {
         setError('');
         setLoading(true);
         try {
-            const res = await axios.post('http://localhost:5000/api/auth/login', { username, password });
+            const res = await axios.post('http://20.204.38.97:5000/api/auth/login', { username, password });
             login(res.data.user, res.data.token);
             navigate('/dashboard');
         } catch (err) {

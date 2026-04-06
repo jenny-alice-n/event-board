@@ -28,7 +28,7 @@ const EventModal = ({ isOpen, onClose, event, onSave }) => {
                 caption: event.caption,
                 registrationLink: event.registrationLink
             });
-            setPreview(`http://localhost:5000/api/events/${event._id}/image`);
+            setPreview(`http://20.204.38.97:5000/api/events/${event._id}/image`);
         } else {
             setFormData({
                 name: '',
@@ -60,9 +60,9 @@ const EventModal = ({ isOpen, onClose, event, onSave }) => {
 
         try {
             if (event) {
-                await axios.patch(`http://localhost:5000/api/events/${event._id}`, data);
+                await axios.patch(`http://20.204.38.97:5000/api/events/${event._id}`, data);
             } else {
-                await axios.post('http://localhost:5000/api/events', data);
+                await axios.post('http://20.204.38.97:5000/api/events', data);
             }
             onSave();
             onClose();

@@ -17,7 +17,7 @@ const ClubModal = ({ isOpen, onClose }) => {
         setLoading(true);
         setMessage('');
         try {
-            await axios.post('http://localhost:5000/api/auth/register-club', formData);
+            await axios.post('http:20.204.38.97:5000/api/auth/register-club', formData);
             setMessage('Club registered successfully!');
             setFormData({ username: '', password: '', clubName: '' });
         } catch (err) {
