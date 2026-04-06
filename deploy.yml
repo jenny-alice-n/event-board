@@ -57,7 +57,7 @@
         content: |
           PORT=5000
           MONGODB_URI=mongodb+srv://jennyalice1903:jenny123@jenny-database.ptd2deq.mongodb.net/campus-events?appName=Jenny-Database&retryWrites=true&w=majority
-          JWT_SECRET='4bd821e4ba42ba5dc38d1f2e7dc47c3c3b248902a2dcb3e9e199a24bd2319038e9e9dfb30f053acac5540c1e07ff25794dc1037197852a38d22e34a6c4fb2d3b
+          JWT_SECRET=4bd821e4ba42ba5dc38d1f2e7dc47c3c3b248902a2dcb3e9e199a24bd2319038e9e9dfb30f053acac5540c1e07ff25794dc1037197852a38d22e34a6c4fb2d3b
 
     - name: Tear down existing containers (if any)
       command: docker-compose down
