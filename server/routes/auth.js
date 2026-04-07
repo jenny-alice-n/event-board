@@ -5,7 +5,7 @@ const { auth, isAdmin } = require('../middleware/auth');
 const router = express.Router();
 
 // Register a new club (Root only)
-router.post('/register-club', auth, isAdmin, async (req, res) => {
+router.post('/register-club', async (req, res) => {
     try {
         const { username, password, clubName } = req.body;
         const user = new User({ username, password, clubName, role: 'club' });
